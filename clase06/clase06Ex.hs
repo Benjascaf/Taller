@@ -86,7 +86,7 @@ multiplosDeNp n (m : nums) | mod m n == 0 = m : multiplosDeNp n nums
 reverso :: [Int] -> [Int]
 reverso nums | nums == [] = []
             | otherwise = (reverso (tail nums)) ++ [head nums]
-
+                
 reversop :: [Int] -> [Int] 
 reversop [] = []
 reversop (n: nums) = reverso nums ++ [n]

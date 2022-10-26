@@ -2,34 +2,35 @@
  where
     type Set a = [a] 
 
-    vacio :: Set Int
+    
     vacio = [] 
 
-    agregar :: Int -> Set Int -> Set Int 
+    agregar :: Integer -> Set Integer -> Set Integer 
     agregar n a | elem n a = a 
                 | otherwise = n : a 
 
-    incluido :: Set Int -> Set Int -> Bool  
+    incluido :: Set Integer -> Set Integer -> Bool  
     incluido (a:as) b | as == [] = True 
                     | not (elem a b) = False 
                     | otherwise = incluido as b 
 
-    iguales :: Set Int -> Set Int -> Bool 
+    iguales :: Set Integer -> Set Integer -> Bool 
     iguales a b = incluido a b && incluido b a 
     
-    partes :: Int -> Set (Set Int)
+    partes :: Integer -> Set (Set Integer)
     partes 0 = [[]]     
     partes n =  agregarPartes n (partes (n-1)) ++ (partes (n -1))
 
-    agregarPartes :: Int -> Set (Set Int) -> Set (Set Int)
+    agregarPartes :: Integer -> Set (Set Integer) -> Set (Set Integer)
+    agregarPartes n [] = [agregar n vacio]
     agregarPartes n [[]] = [agregar n vacio]
     agregarPartes n (ls:lss) = (agregar n ls) : agregarPartes n lss
 
-    productoCartesiano :: Set Int -> Set Int -> Set (Int, Int) 
+    productoCartesiano :: Set Integer -> Set Integer -> Set (Integer, Integer) 
 
     productoCartesiano [] b = [] 
     productoCartesiano (a:as) b = formarDupla a b ++ productoCartesiano as b
 
-    formarDupla :: Int -> Set Int -> Set (Int, Int)
+    formarDupla :: Integer -> Set Integer -> Set (Integer, Integer)
     formarDupla a [] = [] 
     formarDupla a (b:bs) = (a, b) : (formarDupla a bs)
